@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koppi.mapper.CourseMapper">
+    <insert id="insert" parameterType="course">
+        insert into course values (#{id},#{name},#{age},#{cid});
+    </insert>
+    <delete id="delete" parameterType="integer">
+        delete from course where cid = #{cid};
+    </delete>
+    <select id="findAll" resultType="course">
+        select * from course;
+    </select>
+
+    <select id="findById" resultType="course" parameterType="integer">
+        select * from course where cid = #{cid};
+    </select>
+
+    <update id="update" parameterType="course">
+        update course set name=#{name} where cid = #{cid};
+    </update>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koppi.mapper.StudentMapper">
+    <resultMap id="xuanke" type="student">
+        <id property="id" column="id"/>
+        <result property="age" column="age"/>
+        <result property="name" column="name"/>
+        <association property="course" javaType="course" column="cid" select="com.koppi.mapper.CourseMapper.findById" fetchType="lazy"/>
+    </resultMap>
+    <insert id="insert" parameterType="student">
+        insert into student values (#{id},#{name},#{age},#{cid});
+    </insert>
+    <delete id="delete" parameterType="integer">
+        delete from student where id = #{id};
+    </delete>
+    <select id="findAll" resultMap="xuanke">
+        select * from student;
+    </select>
+
+    <select id="findById" resultType="student" parameterType="integer">
+        select * from student where id = #{id};
+    </select>
+
+    <update id="update" parameterType="student">
+        update student set name=#{name},age=#{age},cid=#{cid} where id = #{id};
+    </update>
+</mapper>
